@@ -1,9 +1,32 @@
+"""This module contains code for Class AI"""
+
 import random
 
 import gameboardcls
 
 
 class Ai:
+    """Class Ai(artificial intelligence) used for realization of opponent game logic
+
+        Basic use - clicking free buttons, main goal is to win the round
+
+        Attributes
+        ----------
+        symbol : str
+            this symbol is printed when AI click the button
+
+        Methods
+        -------
+        can_win()
+            Static_method, used as additional for move to win method.
+            Check ability to win or to prevent opponent win
+        move_to_win()
+            Use can_win method to check ability for win. And if it possible(chance = True), AI makes a move.
+            Contain board_model: list where elements are game_buttons
+            Contain win combinations for each directions
+
+        """
+
     symbol = 'O'
 
     def __init__(self):
@@ -11,6 +34,7 @@ class Ai:
 
     @staticmethod
     def can_win(btn1, btn2, btn3, symbol: str):
+        """If buttons form line to win (either for X and O) AI checks chance ability to make win or anti_defeat move"""
         chance = False
         if btn1['text'] == symbol and btn2['text'] == symbol and btn3['text'] == ' ':
             btn3['text'] = Ai.symbol
@@ -24,7 +48,7 @@ class Ai:
         return chance
 
     def move_to_win(self):
-
+        """If AI can_win returns True, AI makes move. Else, AI makes free button random move"""
         board_model = gameboardcls.Gameboard.gameboard_obj.get_all_buttons()
 
         horizontal_win_combinations = [

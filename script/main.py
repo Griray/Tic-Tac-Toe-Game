@@ -1,3 +1,5 @@
+"""This module launch the game and create all gui objects"""
+
 import tkinter as tk
 
 from gameboardcls import Gameboard
